@@ -23,7 +23,6 @@ const bot = new line.Client(line_config);
 server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     // 先行してLINE側にステータスコード200でレスポンスする。
     res.sendStatus(200);
-    console.log('Diagon Alley Boy');
     // すべてのイベント処理のプロミスを格納する配列。
     let events_processed = [];
 
@@ -31,20 +30,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.forEach((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
-            console.log('Hagrid');
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-            if (event.message.text == "こんにちは"){
-                console.log('Professor McGonagall');
+            if (event.message.text == "Wingardrium Leviosar"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
-                    text: "これはこれは"
+                    text: "You're saying it wrong. It's Leviosa, not Leviosar."
                 }));
-            } else {
-                console.log('Albus Dumbledore');
             }
-        } else {
-            console.log('Harry Potter');
         }
     });
 
