@@ -40,13 +40,17 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.forEach((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
+            console.log('Hagrid');
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-            if (event.message.text == "こんにちは"){
+            if (event.message.text == "A"){
+                console.log('Professor McGonagall');
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "text",
                     text: "これはこれは"
                 }));
+            } else {
+                console.log('Albus Dumbledore');
             }
         } else {
             console.log('Harry Potter');
