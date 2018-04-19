@@ -48,6 +48,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     text: "これはこれは"
                 }));
             }
+        } else {
+            console.log('Harry Potter');
         }
     });
 
