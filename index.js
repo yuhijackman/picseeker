@@ -3,13 +3,14 @@
 var express = require('express');
 const server = express();
 const line = require("@line/bot-sdk"); // Messaging APIのSDKをインポート
-
+var Bing = require('node-bing-api')({ accKey: process.env.BING_ACCESS_KEY});
 // -----------------------------------------------------------------------------
 // パラメータ設定
 const line_config = {
     channelAccessToken: process.env.LINE_ACCESS_TOKEN, // 環境変数からアクセストークンをセットしています
     channelSecret: process.env.LINE_CHANNEL_SECRET // 環境変数からChannel Secretをセットしています
 };
+
 
 // -----------------------------------------------------------------------------
 // Webサーバー設定
@@ -30,6 +31,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
     req.body.events.forEach((event) => {
         // この処理の対象をイベントタイプがメッセージで、かつ、テキストタイプだった場合に限定。
         if (event.type == "message" && event.message.type == "text"){
+            Bing.images(event.message.text, {
+              market: 'ja-JP',
+              imageFilters: 'Size:Medium',
+              adult: 'Strict'
+            }, function(error, res, body) {
+              console.log(body.d.results);
+            });
+             console.log("WHOOO");
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "Wingardrium Leviosar"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
