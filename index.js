@@ -38,10 +38,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }, function(error, res, body) {
               console.log(body.d.results);
             });
-            console.log("あああ");
-            console.log(Bing);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
-            console.log("いいい");
             if (event.message.text == "Wingardrium Leviosar"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 events_processed.push(bot.replyMessage(event.replyToken, {
@@ -49,6 +46,8 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
                     originalContentUrl: image_url,
                     previewImageUrl: image_url
                 }));
+            } else {
+                console.log("あああ");
             }
         }
     });
