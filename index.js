@@ -38,13 +38,14 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }, function(error, res, body) {
               console.log(body.d.results);
             });
-             console.log("WHOOO");
+             console.log(Bing);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "Wingardrium Leviosar"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
                 events_processed.push(bot.replyMessage(event.replyToken, {
-                    type: "text",
-                    text: "You're saying it wrong. It's Leviosa, not Leviosar!"
+                    type: "image",
+                    originalContentUrl: image_url,
+                    previewImageUrl: image_url
                 }));
             }
         }
