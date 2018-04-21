@@ -38,6 +38,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             }, function(error, res, body) {
               console.log(body.d.results);
             });
+            console.log("ss");
              console.log(Bing);
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "Wingardrium Leviosar"){
