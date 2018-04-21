@@ -41,6 +41,7 @@ server.post('/webhook', line.middleware(line_config), (req, res, next) => {
             // ユーザーからのテキストメッセージが「こんにちは」だった場合のみ反応。
             if (event.message.text == "Wingardrium Leviosar"){
                 // replyMessage()で返信し、そのプロミスをevents_processedに追加。
+                console.log("あああ");
                 events_processed.push(bot.replyMessage(event.replyToken, {
                     type: "image",
                     originalContentUrl: image_url,
